@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Data;
+using Microsoft.Extensions.Logging;
 
 namespace Manager_for_3_D_Printing;
 
@@ -18,6 +19,10 @@ public static class MauiProgram
 #if DEBUG
         builder.Logging.AddDebug();
 #endif
+        
+        string dbPath = Path.Combine(FileSystem.AppDataDirectory, "model_library.db");
+        builder.Services.AddSingleton(new DatabaseContext(dbPath));
+
 
         return builder.Build();
     }

@@ -1,0 +1,10 @@
+namespace Models;
+
+public class ModelVersion
+{
+    public int Id { get; set; }
+    public int ModelId { get; set; }
+    public string Notes { get; set; }
+    public string VersionLabel { get; set; }
+    public DateTime CreatedAt { get; set; }
+}
