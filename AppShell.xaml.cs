@@ -1,9 +1,12 @@
-﻿namespace Manager_for_3_D_Printing;
+﻿using Microsoft.Maui.Controls;
 
-public partial class AppShell : Shell
+namespace Manager_for_3_D_Printing
 {
-    public AppShell()
+    public partial class AppShell : Shell
     {
-        InitializeComponent();
+        public AppShell()
+        {
+            InitializeComponent();
+        }
     }
 }

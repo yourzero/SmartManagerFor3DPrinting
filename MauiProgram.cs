@@ -1,29 +1,32 @@
-﻿using Data;
-using Microsoft.Extensions.Logging;
+using Microsoft.Maui;
+using Microsoft.Maui.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using System.IO;
+using Manager_for_3_D_Printing.Data;
+using Manager_for_3_D_Printing.ViewModels;
 
-namespace Manager_for_3_D_Printing;
-
-public static class MauiProgram
+namespace Manager_for_3_D_Printing
 {
-    public static MauiApp CreateMauiApp()
+    public static class MauiProgram
     {
-        var builder = MauiApp.CreateBuilder();
-        builder
-            .UseMauiApp<App>()
-            .ConfigureFonts(fonts =>
-            {
-                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-            });
+        public static MauiApp CreateMauiApp()
+        {
+            var builder = MauiApp.CreateBuilder();
+            builder
+                .UseMauiApp<App>()
+                .ConfigureFonts(fonts =>
+                {
+                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                });
 
-#if DEBUG
-        builder.Logging.AddDebug();
-#endif
-        
-        string dbPath = Path.Combine(FileSystem.AppDataDirectory, "model_library.db");
-        builder.Services.AddSingleton(new DatabaseContext(dbPath));
+            string dbPath = Path.Combine(FileSystem.AppDataDirectory, "models.db");
+            builder.Services.AddSingleton(new DatabaseContext(dbPath));
+            builder.Services.AddSingleton<ModelBrowserViewModel>();
+            builder.Services.AddSingleton<PrintQueueViewModel>();
 
-
-        return builder.Build();
+            var app = builder.Build();
+            App.SetServiceProvider(app.Services);
+            return app;
+        }
     }
 }

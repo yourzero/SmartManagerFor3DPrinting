@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Shell
-    x:Class="Manager_for_3_D_Printing.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:Manager_for_3_D_Printing"
-    Shell.FlyoutBehavior="Disabled"
-    Title="Manager_for_3_D_Printing">
+    xmlns:views="clr-namespace:Manager_for_3_D_Printing.Views"
+    x:Class="Manager_for_3_D_Printing.AppShell">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
-
+    <TabBar>
+        <ShellContent Title="Library" Icon="icon_library.png">
+            <views:ModelBrowserPage />
+        </ShellContent>
+        <ShellContent Title="Queue" Icon="icon_queue.png">
+            <views:PrintQueuePage />
+        </ShellContent>
+    </TabBar>
 </Shell>
