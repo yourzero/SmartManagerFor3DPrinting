@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Microsoft.Maui;
 using Microsoft.Maui.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,6 +22,10 @@ namespace Manager_for_3_D_Printing
 
             string dbPath = Path.Combine(FileSystem.AppDataDirectory, "models.db");
             builder.Services.AddSingleton(new DatabaseContext(dbPath));
+            
+            Debug.WriteLine($"DB file is at {dbPath}");
+
+            
             builder.Services.AddSingleton<ModelBrowserViewModel>();
             builder.Services.AddSingleton<PrintQueueViewModel>();
 

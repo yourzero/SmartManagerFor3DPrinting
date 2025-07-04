@@ -1,11 +1,14 @@
-namespace Models;
+using SQLite;
+using System;
 
-public class ModelFile
+namespace Manager_for_3_D_Printing.Models
 {
-    public int Id { get; set; }
-    public int ModelId { get; set; }
-    public string FileName { get; set; }
-    public string FileType { get; set; } // STL, 3MF, GCODE
-    public string RelativePath { get; set; } // Relative to model folder
-    public DateTime DateAdded { get; set; }
+    public class ModelFile
+    {
+        [PrimaryKey]
+        public string Id { get; set; } = Guid.NewGuid().ToString();
+        public string ModelId { get; set; } = string.Empty;
+        public string FilePath { get; set; } = string.Empty;
+        public string FileType { get; set; } = string.Empty;
+    }
 }

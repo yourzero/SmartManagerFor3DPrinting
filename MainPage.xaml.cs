@@ -20,6 +20,11 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         InitializeComponent();
+        
+        // you need to assign _db here:
+        _db = App.ServiceProvider
+                  .GetService<DatabaseContext>() 
+              ?? throw new InvalidOperationException("DB not registered");
     }
 
     private void OnCounterClicked(object sender, EventArgs e)

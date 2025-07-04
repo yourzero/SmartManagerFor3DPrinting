@@ -1,8 +1,8 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using Manager_for_3_D_Printing.Data;
 using Manager_for_3_D_Printing.Models;
-using SQLite;
 
 namespace Manager_for_3_D_Printing.ViewModels
 {

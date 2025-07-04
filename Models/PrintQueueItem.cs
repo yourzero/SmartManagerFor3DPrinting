@@ -1,14 +1,14 @@
-namespace Models;
+using SQLite;
+using System;
 
-public class PrintQueueItem
+namespace Manager_for_3_D_Printing.Models
 {
-    public int Id { get; set; }
-    public int ModelId { get; set; }
-    public string FilamentType { get; set; }
-    public string FilamentColor { get; set; }
-    public string Status { get; set; } // Queued, Printed, Failed, Deferred
-    public DateTime? DueDate { get; set; }
-    public string Notes { get; set; }
-    public int? EstimatedPrintTimeMinutes { get; set; }
-    public int Priority { get; set; }
+    public class PrintQueueItem
+    {
+        [PrimaryKey]
+        public string Id { get; set; } = Guid.NewGuid().ToString();
+        public string ModelId { get; set; } = string.Empty;
+        public string FilamentType { get; set; } = string.Empty;
+        public string Status { get; set; } = string.Empty;
+    }
 }
