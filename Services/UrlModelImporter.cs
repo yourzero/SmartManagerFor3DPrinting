@@ -26,6 +26,7 @@ namespace Manager_for_3_D_Printing.Services
             if (string.IsNullOrEmpty(fileName))
                 throw new InvalidOperationException("Cannot determine filename from URL.");
 
+            
             var model = new Model
             {
                 Name = Path.GetFileNameWithoutExtension(fileName),
@@ -43,13 +44,21 @@ namespace Manager_for_3_D_Printing.Services
             await using var stream = await response.Content.ReadAsStreamAsync();
             await stream.CopyToAsync(fs);
 
-          
 
             await database.InsertModelAsync(model);
 
+            var fileType = Path.GetExtension(fileName).TrimStart('.').ToLowerInvariant();
+            var modelFile = new ModelFile
+            {
+                ModelId = modelId,
+                FilePath = destPath,
+                FileType = fileType
+            };
+            await database.InsertModelFileAsync(modelFile);
+
             return model;
         }
-
+        
         private static string GenerateModelDirectory(Model model)
         {
             // copy into your library folder

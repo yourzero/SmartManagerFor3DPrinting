@@ -1,11 +1,10 @@
-Import-via-URL Integration - README
+Import-via-URL Integration (Updated)
 
-1. **Register services** in MauiProgram.cs:
+1. Register services in MauiProgram.cs:
    builder.Services.AddHttpClient<IModelImporter, UrlModelImporter>();
+   builder.Services.AddSingleton<DatabaseContext>(sp => new DatabaseContext(Path.Combine(FileSystem.AppDataDirectory, "app.db")));
 
-2. **Ensure DatabaseContext** is registered:
-   builder.Services.AddSingleton<DatabaseContext>();
+2. Ensure existing registrations for ModelBrowserPage, ViewModels, etc.
 
-3. **ModelBrowserPage**:
-   - XAML now has "Import from URL" button.
-   - Code-behind handles URL prompt and import logic.
+3. The UrlModelImporter now inserts both Model and ModelFile records,
+   matching your current ModelFile.cs and Model.cs definitions.
