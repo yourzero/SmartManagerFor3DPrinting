@@ -1,23 +1,43 @@
+using System;
+using Microsoft.Maui.Controls;
+using Manager_for_3_D_Printing.Services;
 using Manager_for_3_D_Printing.ViewModels;
 
-namespace Manager_for_3_D_Printing.Views;
-
-public partial class ModelBrowserPage : ContentPage
+namespace Manager_for_3_D_Printing.Views
 {
-    private readonly ModelBrowserViewModel vm;
-
-    public ModelBrowserPage()
+    public partial class ModelBrowserPage : ContentPage
     {
-        InitializeComponent();
-        vm = App.ServiceProvider.GetService<ModelBrowserViewModel>()!;
-        BindingContext = vm;
-    }
+        private readonly IModelImporter modelImporter;
 
-    protected override async void OnAppearing()
-    {
-        base.OnAppearing();
-        //Task.Run(async () => await vm.LoadModelsAsync());
-        if (BindingContext is ModelBrowserViewModel vm)
-            await vm.LoadModelsAsync();
+        public ModelBrowserPage(IModelImporter modelImporter)
+        {
+            InitializeComponent();
+            this.modelImporter = modelImporter;
+        }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            if (BindingContext is ModelBrowserViewModel vm)
+                await vm.LoadModelsAsync();
+        }
+
+        private async void OnImportFromUrlClicked(object sender, EventArgs e)
+        {
+            var url = await DisplayPromptAsync("Import Model", "Enter model URL:");
+            if (string.IsNullOrWhiteSpace(url))
+                return;
+
+            try
+            {
+                await modelImporter.ImportFromUrlAsync(url);
+                if (BindingContext is ModelBrowserViewModel vm)
+                    await vm.LoadModelsAsync();
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
     }
 }

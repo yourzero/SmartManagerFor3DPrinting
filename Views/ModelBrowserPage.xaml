@@ -1,25 +1,43 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:Manager_for_3_D_Printing.ViewModels"
+    x:Class="Manager_for_3_D_Printing.Views.ModelBrowserPage"
+    Title="Model Browser">
 
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Manager_for_3_D_Printing.Views.ModelBrowserPage"
-             Title="Library">
+    <ContentPage.BindingContext>
+        <viewModels:ModelBrowserViewModel />
+    </ContentPage.BindingContext>
 
+    <StackLayout Padding="10" Spacing="10">
+        <!-- Import from URL button -->
+        <Button
+            Text="Import from URL"
+            Clicked="OnImportFromUrlClicked"
+            HorizontalOptions="Fill" />
 
-    <VerticalStackLayout>
-        <Button Text="Import Model" Command="{Binding ImportModelCommand}" />
+        <!-- Existing import/picker button -->
+        <Button
+            Text="Import Model"
+            Command="{Binding ImportModelCommand}"
+            HorizontalOptions="Fill" />
+
+        <!-- SearchBar -->
+        <SearchBar
+            Placeholder="Filter by name…"
+            Text="{Binding FilterText}" />
+
+        <!-- Model list -->
         <CollectionView ItemsSource="{Binding Models}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame>
-                        <VerticalStackLayout>
-                            <Image Source="{Binding PreviewImagePath}" HeightRequest="100" />
-                            <Label Text="{Binding Name}" />
-                            <Label Text="{Binding DateAdded, StringFormat='{0:MM/dd/yyyy}'}" />
-                        </VerticalStackLayout>
-                    </Frame>
+                    <!-- Your existing template -->
+                    <Grid Padding="5">
+                        <Label Text="{Binding Name}" FontSize="Medium" />
+                    </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-    </VerticalStackLayout>
+    </StackLayout>
 </ContentPage>

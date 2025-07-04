@@ -19,8 +19,14 @@ public class ModelBrowserViewModel(DatabaseContext database)
         foreach (var m in list)
             Models.Add(m);
     }
-    
-    public ICommand ImportModelCommand => new Command(async () =>
+
+    public ICommand ImportModelFromUrlCommand => new Command(async () =>
+    {
+        
+        
+    });
+
+    public ICommand ImportModelAsFileCommand => new Command(async () =>
     {
         var pick = await FilePicker.PickAsync(new PickOptions
         {
