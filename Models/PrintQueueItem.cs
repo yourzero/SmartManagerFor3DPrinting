@@ -1,8 +1,8 @@
 using SQLite;
 using System;
 
-namespace Manager_for_3_D_Printing.Models
-{
+namespace Manager_for_3_D_Printing.Models;
+
     public class PrintQueueItem
     {
         [PrimaryKey]
@@ -11,4 +11,4 @@ namespace Manager_for_3_D_Printing.Models
         public string FilamentType { get; set; } = string.Empty;
         public string Status { get; set; } = string.Empty;
     }
-}
+

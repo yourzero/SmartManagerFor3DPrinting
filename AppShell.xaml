@@ -6,6 +6,9 @@
     x:Class="Manager_for_3_D_Printing.AppShell">
 
     <TabBar>
+        <ShellContent Title="Models" ContentTemplate="{DataTemplate views:ModelBrowserPage}" />
+        <ShellContent Title="Queue"  ContentTemplate="{DataTemplate views:PrintQueuePage}" />
+
         <ShellContent Title="Library" Icon="icon_library.png">
             <views:ModelBrowserPage />
         </ShellContent>

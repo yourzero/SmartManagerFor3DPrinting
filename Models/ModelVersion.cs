@@ -1,4 +1,4 @@
-namespace Models;
+namespace Manager_for_3_D_Printing.Models;
 
 public class ModelVersion
 {

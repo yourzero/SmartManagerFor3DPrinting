@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="using:Manager_for_3_D_Printing.ViewModels"
              x:Class="Manager_for_3_D_Printing.Views.ModelBrowserPage"
              Title="Library">
-    <CollectionView ItemsSource="{Binding Models}">
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <Grid Padding="10" ColumnDefinitions="60,*">
-                    <Image Source="{Binding PreviewImagePath}" WidthRequest="60" HeightRequest="60"/>
-                    <Label Text="{Binding Name}" Grid.Column="1" VerticalOptions="Center" Margin="10,0"/>
-                </Grid>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+    
+    
+    <VerticalStackLayout>
+        <Button Text="Import Model" Command="{Binding ImportModelCommand}" />
+        <CollectionView ItemsSource="{Binding Models}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame>
+                        <VerticalStackLayout>
+                            <Image Source="{Binding PreviewImagePath}" HeightRequest="100"/>
+                            <Label Text="{Binding Name}" />
+                            <Label Text="{Binding DateAdded, StringFormat='{0:MM/dd/yyyy}'}" />
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
 </ContentPage>

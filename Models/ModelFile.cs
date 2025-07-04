@@ -1,8 +1,8 @@
 using SQLite;
 using System;
 
-namespace Manager_for_3_D_Printing.Models
-{
+namespace Manager_for_3_D_Printing.Models;
+
     public class ModelFile
     {
         [PrimaryKey]
@@ -11,4 +11,4 @@ namespace Manager_for_3_D_Printing.Models
         public string FilePath { get; set; } = string.Empty;
         public string FileType { get; set; } = string.Empty;
     }
-}
+
