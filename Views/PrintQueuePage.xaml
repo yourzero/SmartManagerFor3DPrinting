@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Manager_for_3_D_Printing.Views.PrintQueuePage"
@@ -8,8 +9,8 @@
             <DataTemplate>
                 <Grid Padding="10" ColumnDefinitions="*,*,*">
                     <Label Text="{Binding ModelId}" />
-                    <Label Text="{Binding FilamentType}" Grid.Column="1"/>
-                    <Label Text="{Binding Status}" Grid.Column="2"/>
+                    <Label Text="{Binding FilamentType}" Grid.Column="1" />
+                    <Label Text="{Binding Status}" Grid.Column="2" />
                 </Grid>
             </DataTemplate>
         </CollectionView.ItemTemplate>

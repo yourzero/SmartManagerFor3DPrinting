@@ -5,24 +5,23 @@ namespace Manager_for_3_D_Printing;
 
 public partial class MainPage : ContentPage
 {
-
     private readonly DatabaseContext _db;
-    
-    int count = 0;
+
+    private int count;
 
     public MainPage(DatabaseContext db)
     {
         InitializeComponent();
         _db = db;
     }
-    
+
     public MainPage()
     {
         InitializeComponent();
-        
+
         // you need to assign _db here:
         _db = App.ServiceProvider
-                  .GetService<DatabaseContext>() 
+                  .GetService<DatabaseContext>()
               ?? throw new InvalidOperationException("DB not registered");
     }
 
