@@ -13,9 +13,11 @@ public partial class ModelBrowserPage : ContentPage
         BindingContext = vm;
     }
 
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
-        Task.Run(async () => await vm.LoadModelsAsync());
+        //Task.Run(async () => await vm.LoadModelsAsync());
+        if (BindingContext is ModelBrowserViewModel vm)
+            await vm.LoadModelsAsync();
     }
 }

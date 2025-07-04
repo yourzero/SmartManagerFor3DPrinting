@@ -27,8 +27,8 @@ public class DatabaseContext
         await Connection.CreateTableAsync<ModelVersion>();
         await Connection.CreateTableAsync<PrintQueueItem>();
 
-        // 2) Seed test data if you're starting fresh
-        await SeedTestDataAsync();
+        // // 2) Seed test data if you're starting fresh
+        // await SeedTestDataAsync();
     }
 
     private async Task SeedTestDataAsync()

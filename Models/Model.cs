@@ -18,6 +18,11 @@ public class Model
     public string? Description { get; set; }
     public string? Tags { get; set; }
     public string? SourceUrl { get; set; }
+    public string? FullRootFolderPath { get; set; } // TODO - this is probably overkill
+    public string? FolderName { get; set; }
+    public string? FileName { get; set; }
+    //public string? FilePath { get; set; } // TODO - calculate
+    public string? FileHash { get; set; }
     public DateTime DateAdded { get; set; }
     public DateTime? LastPrinted { get; set; }
 }
