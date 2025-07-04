@@ -6,9 +6,7 @@
     x:Class="Manager_for_3_D_Printing.Views.ModelBrowserPage"
     Title="Model Browser">
 
-    <ContentPage.BindingContext>
-        <viewModels:ModelBrowserViewModel />
-    </ContentPage.BindingContext>
+    
 
     <StackLayout Padding="10" Spacing="10">
         <!-- Import from URL button -->

@@ -1,29 +1,33 @@
-using System.Diagnostics;
+using Microsoft.Maui.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using Manager_for_3_D_Printing.Data;
+using Manager_for_3_D_Printing.Services;
 using Manager_for_3_D_Printing.ViewModels;
+using Manager_for_3_D_Printing.Views;
 
-namespace Manager_for_3_D_Printing;
-
-public static class MauiProgram
+namespace Manager_for_3_D_Printing
 {
-    public static MauiApp CreateMauiApp()
+    public static class MauiProgram
     {
-        var builder = MauiApp.CreateBuilder();
-        builder
-            .UseMauiApp<App>()
-            .ConfigureFonts(fonts => { fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular"); });
+        public static MauiApp CreateMauiApp()
+        {
+            var builder = MauiApp.CreateBuilder();
+            builder
+                .UseMauiApp<App>()
+                .ConfigureFonts(fonts => { /* fonts config */ });
 
-        var dbPath = Path.Combine(FileSystem.AppDataDirectory, "models.db");
-        builder.Services.AddSingleton(new DatabaseContext(dbPath));
+            // DB and import services
+            builder.Services.AddSingleton<DatabaseContext>();
+            builder.Services.AddSingleton<ModelImportService>();
+            builder.Services.AddSingleton<IFileModelImporter, FileModelImporter>();
+            //builder.Services.AddSingleton<IUrlModelImporter, UrlModelImporter>();
+            builder.Services.AddHttpClient<IUrlModelImporter, UrlModelImporter>();
+            
+            // ViewModels and Views
+            builder.Services.AddTransient<ModelBrowserViewModel>();
+            builder.Services.AddTransient<ModelBrowserPage>();
 
-        Debug.WriteLine($"DB file is at {dbPath}");
-
-
-        builder.Services.AddSingleton<ModelBrowserViewModel>();
-        builder.Services.AddSingleton<PrintQueueViewModel>();
-
-        var app = builder.Build();
-        App.SetServiceProvider(app.Services);
-        return app;
+            return builder.Build();
+        }
     }
 }

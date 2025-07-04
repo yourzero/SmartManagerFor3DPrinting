@@ -1,4 +1,5 @@
 using System;
+using Manager_for_3_D_Printing.Data;
 using Microsoft.Maui.Controls;
 using Manager_for_3_D_Printing.Services;
 using Manager_for_3_D_Printing.ViewModels;
@@ -7,12 +8,31 @@ namespace Manager_for_3_D_Printing.Views
 {
     public partial class ModelBrowserPage : ContentPage
     {
-        private readonly IModelImporter modelImporter;
+        private readonly IUrlModelImporter _urlModelImporter;
+        private readonly IFileModelImporter _fileImporter;
+        private DatabaseContext _database;
 
-        public ModelBrowserPage(IModelImporter modelImporter)
+        // public ModelBrowserPage(IUrlModelImporter urlModelImporter)
+        // {
+        //     InitializeComponent();
+        //     this._urlModelImporter = urlModelImporter;
+        // }
+        public ModelBrowserPage() 
+            : this(
+                App.ServiceProvider.GetRequiredService<IUrlModelImporter>(),
+                App.ServiceProvider.GetRequiredService<IFileModelImporter>(),
+                App.ServiceProvider.GetRequiredService<DatabaseContext>())
+        { }
+        
+        public ModelBrowserPage(
+            IUrlModelImporter urlImporter,
+            IFileModelImporter fileImporter, DatabaseContext database)
         {
             InitializeComponent();
-            this.modelImporter = modelImporter;
+            _urlModelImporter = urlImporter;
+            _fileImporter = fileImporter;
+            _database = database;
+            BindingContext = new ModelBrowserViewModel(_database,_fileImporter);
         }
 
         protected override async void OnAppearing()
@@ -30,7 +50,7 @@ namespace Manager_for_3_D_Printing.Views
 
             try
             {
-                await modelImporter.ImportFromUrlAsync(url);
+                await _urlModelImporter.ImportFromUrlAsync(url);
                 if (BindingContext is ModelBrowserViewModel vm)
                     await vm.LoadModelsAsync();
             }
