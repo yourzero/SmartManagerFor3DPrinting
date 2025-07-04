@@ -3,8 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Manager_for_3_D_Printing.ViewModels;
 using System.Threading.Tasks;
 
-namespace Manager_for_3_D_Printing.Views
-{
+namespace Manager_for_3_D_Printing.Views;
+
     public partial class ModelBrowserPage : ContentPage
     {
         private readonly ModelBrowserViewModel vm;
@@ -22,4 +22,4 @@ namespace Manager_for_3_D_Printing.Views
             Task.Run(async () => await vm.LoadModelsAsync());
         }
     }
-}
+

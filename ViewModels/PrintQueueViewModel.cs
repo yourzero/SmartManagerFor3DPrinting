@@ -4,8 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Manager_for_3_D_Printing.Data;
 using Manager_for_3_D_Printing.Models;
 
-namespace Manager_for_3_D_Printing.ViewModels
-{
+namespace Manager_for_3_D_Printing.ViewModels;
+
     public class PrintQueueViewModel
     {
         private readonly DatabaseContext db;
@@ -24,4 +24,4 @@ namespace Manager_for_3_D_Printing.ViewModels
                 QueueItems.Add(item);
         }
     }
-}
+

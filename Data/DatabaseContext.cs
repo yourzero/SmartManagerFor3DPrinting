@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 using Manager_for_3_D_Printing.Models;
 using Microsoft.Maui.Storage;
 
-namespace Manager_for_3_D_Printing.Data
-{
+namespace Manager_for_3_D_Printing.Data;
+
     public class DatabaseContext
     {
         public SQLiteAsyncConnection Connection { get; }
@@ -117,4 +117,4 @@ namespace Manager_for_3_D_Printing.Data
         public Task<int> UpdateQueueItemAsync(PrintQueueItem q) => Connection.UpdateAsync(q);
         public Task<int> DeleteQueueItemAsync(PrintQueueItem q) => Connection.DeleteAsync(q);
     }
-}
+

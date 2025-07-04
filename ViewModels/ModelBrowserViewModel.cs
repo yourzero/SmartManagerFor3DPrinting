@@ -4,8 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Manager_for_3_D_Printing.Data;
 using Manager_for_3_D_Printing.Models;
 
-namespace Manager_for_3_D_Printing.ViewModels
-{
+namespace Manager_for_3_D_Printing.ViewModels;
+
     public class ModelBrowserViewModel(DatabaseContext database)
     {
         public ObservableCollection<Model> Models { get; } = new ObservableCollection<Model>();
@@ -18,4 +18,4 @@ namespace Manager_for_3_D_Printing.ViewModels
                 Models.Add(m);
         }
     }
-}
+
