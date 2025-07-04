@@ -16,7 +16,7 @@ public partial class App : Application
         MainPage = new AppShell();
     }
 
-    public static IServiceProvider ServiceProvider { get; private set; } = null!;
+    public static IServiceProvider ServiceProvider { get; set; } = null!;
 
     protected override Window CreateWindow(IActivationState state)
     {

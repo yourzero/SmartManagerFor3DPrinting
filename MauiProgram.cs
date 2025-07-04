@@ -17,17 +17,25 @@ namespace Manager_for_3_D_Printing
                 .ConfigureFonts(fonts => { /* fonts config */ });
 
             // DB and import services
-            builder.Services.AddSingleton<DatabaseContext>();
+            //builder.Services.AddSingleton<DatabaseContext>();
             builder.Services.AddSingleton<ModelImportService>();
             builder.Services.AddSingleton<IFileModelImporter, FileModelImporter>();
             //builder.Services.AddSingleton<IUrlModelImporter, UrlModelImporter>();
             builder.Services.AddHttpClient<IUrlModelImporter, UrlModelImporter>();
             
+            builder.Services.AddSingleton<DatabaseContext>(sp => new DatabaseContext(Path.Combine(FileSystem.AppDataDirectory, "app.db")));
+
+            
             // ViewModels and Views
             builder.Services.AddTransient<ModelBrowserViewModel>();
             builder.Services.AddTransient<ModelBrowserPage>();
+            
 
-            return builder.Build();
+            var x = builder.Build();
+
+            App.ServiceProvider = x.Services;
+            
+            return x;
         }
     }
 }
